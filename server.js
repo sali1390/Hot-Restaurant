@@ -27,7 +27,11 @@ app.get('/tables', function (req, res) {
 
 app.post('/api/tables', urlencodedParser, function (req, res){
     console.log(req.body)
-    doGet(req.body);
+    if (reservations.length < 5){
+    reservations.push(req.body);
+    } else {
+    waitlist.push(req.body);
+    }
 })
 
 function doGet(superObject){
