@@ -25,9 +25,16 @@ app.get('/tables', function (req, res) {
 })
 
 
-app.post('/', urlencodedParser, function (req, res){
+app.post('/api/tables', urlencodedParser, function (req, res){
     console.log(req.body)
+    doGet(req.body);
 })
+
+function doGet(superObject){
+    app.get('/api/tables', function (req, res) {
+        res.send(superObject)
+    })
+}
 
 app.listen(3000)
 console.log('Listening on PORT 3000');
