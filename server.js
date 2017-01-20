@@ -10,7 +10,6 @@ var app = express()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var reservations = [];
-var waitlist = [];
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'home.html'));
@@ -27,16 +26,13 @@ app.get('/tables', function (req, res) {
 
 app.post('/api/tables', urlencodedParser, function (req, res){
     console.log(req.body)
-    if (reservations.length < 5){
-    reservations.push(req.body);
-    } else {
-    waitlist.push(req.body);
-    }
+    reservations.push(req.body)
+    doGet(reservations)
 })
 
-function doGet(superObject){
+function doGet(reservations){
     app.get('/api/tables', function (req, res) {
-        res.send(superObject)
+        res.send(reservations)
     })
 }
 
