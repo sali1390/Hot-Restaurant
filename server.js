@@ -10,7 +10,6 @@ var app = express()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var reservations = [];
-var waitlist = [];
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'home.html'));
@@ -25,9 +24,17 @@ app.get('/tables', function (req, res) {
 })
 
 
-app.post('/', urlencodedParser, function (req, res){
+app.post('/api/tables', urlencodedParser, function (req, res){
     console.log(req.body)
+    reservations.push(req.body)
+    doGet(reservations)
 })
+
+function doGet(reservations){
+    app.get('/api/tables', function (req, res) {
+        res.send(reservations)
+    })
+}
 
 app.listen(3000)
 console.log('Listening on PORT 3000');
