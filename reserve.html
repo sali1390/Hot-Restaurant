@@ -110,7 +110,7 @@
 		var currentURL = window.location.origin;
 
 
-	    $.post(currentURL + "/api/tables", newReservation,
+	    $.post("http://localhost:3000", newReservation,
 	    function(data){
 
 	    	// If a table is available... tell user they are booked.
