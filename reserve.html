@@ -94,25 +94,32 @@
 		console.log(newReservation);
         
 		var currentURL = window.location.origin;
+        
+        $.ajax({
+            url: "http://localhost:3000/api/tables",
+            context: document.body
+        }).done(function() {
+            console.log();
+        });
 
-	    $.post("http://localhost:3000", newReservation, function(data){
-            console.log(data);
-
-	    	if(data == true){
-	    		alert("Yay! You are officially booked!")
-	    	}
-
-	    	if(data == false){
-	    		alert("Sorry you are on the wait list")
-	    	}
-
-	    	// Clear the form
-    		$('#reserve_name').val("");
-			$('#reserve_phone').val("");
-			$('#reserve_email').val("");
-			$('#reserve_uniqueID').val("");
-
-	    });
+//	    $.post("http://localhost:3000", newReservation, function(data){
+//            console.log(data);
+//
+//	    	if(data == true){
+//	    		alert("Yay! You are officially booked!")
+//	    	}
+//
+//	    	if(data == false){
+//	    		alert("Sorry you are on the wait list")
+//	    	}
+//
+//	    	// Clear the form
+//    		$('#reserve_name').val("");
+//			$('#reserve_phone').val("");
+//			$('#reserve_email').val("");
+//			$('#reserve_uniqueID').val("");
+//
+//	    });
 
 return false;
 
